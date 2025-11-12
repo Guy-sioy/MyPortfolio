@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio | Template</title>
+
+  <!-- ฟอนต์ทางการ -->
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <!-- ลิงก์ CSS -->
+  <link rel="stylesheet" href="../style.css">
+
+  <!-- สคริปต์หลัก -->
+  <script type="module" src="main/contact.js" defer></script>
+</head>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  // ================================
+  // 🏆 Certificate Modal (ขยายรูปเดียว)
+  // ================================
+  const certModal = document.getElementById("imageModal");
+  const certModalImg = document.getElementById("modalImage");
+  const certClose = document.querySelector(".close-modal");
+  const navbar = document.querySelector(".navbar");
+
+  document.querySelectorAll(".certificates img").forEach((img) => {
+    img.style.cursor = "pointer";
+    img.addEventListener("click", () => {
+      certModal.classList.add("show");
+      certModalImg.src = img.src;
+      navbar.classList.add("hidden");
+      document.body.style.overflow = "hidden"; // 🔒 ปิดการ scroll
+    });
+  });
+
+  certClose.addEventListener("click", () => {
+    certModal.classList.remove("show");
+    navbar.classList.remove("hidden");
+    document.body.style.overflow = "auto";
+  });
+
+  certModal.addEventListener("click", (e) => {
+    if (e.target === certModal) {
+      certModal.classList.remove("show");
+      navbar.classList.remove("hidden");
+      document.body.style.overflow = "auto";
+    }
+  });
+
+  // ================================
+  // 💻 Project Modal (ขยาย + ปุ่มเลื่อน)
+  // ================================
+  const projModal = document.getElementById("projectModal");
+  const projModalImg = document.getElementById("projectModalImg");
+  const projClose = document.querySelector(".close-btn");
+  const nextBtn = document.querySelector(".next-btn");
+  const prevBtn = document.querySelector(".prev-btn");
+
+  const projects = {
+    1: ["", "", ""],
+    2: ["../img/unnamed.jpg", "../img/Screenshot 2025-11-12 195743.png", "../img/Screenshot 2025-11-12 195909.png"],
+    3: ["", "", ""]
+  };
+
+  let currentProject = null;
+  let currentIndex = 0;
+
+  // 🔹 เมื่อคลิกภาพโปรเจกต์
+  document.querySelectorAll(".projects .portfolio-item").forEach((item) => {
+    item.addEventListener("click", () => {
+      currentProject = item.dataset.project;
+      currentIndex = 0;
+      projModalImg.src = projects[currentProject][currentIndex];
+      projModal.classList.add("show");
+      document.body.style.overflow = "hidden"; // ปิดการเลื่อน
+    });
+  });
+
+  // 🔹 ปุ่มเลื่อนขวา
+  nextBtn.addEventListener("click", () => {
+    if (!currentProject) return;
+    currentIndex = (currentIndex + 1) % projects[currentProject].length;
+    projModalImg.src = projects[currentProject][currentIndex];
+  });
+
+  // 🔹 ปุ่มเลื่อนซ้าย
+  prevBtn.addEventListener("click", () => {
+    if (!currentProject) return;
+    currentIndex = (currentIndex - 1 + projects[currentProject].length) % projects[currentProject].length;
+    projModalImg.src = projects[currentProject][currentIndex];
+  });
+
+  // ❌ ปิด modal
+  projClose.addEventListener("click", () => {
+    projModal.classList.remove("show");
+    document.body.style.overflow = "auto";
+  });
+
+  // 🖱️ คลิกนอกภาพเพื่อปิด
+  projModal.addEventListener("click", (e) => {
+    if (e.target === projModal) {
+      projModal.classList.remove("show");
+      document.body.style.overflow = "auto";
+    }
+  });
+});
+</script>
+
+<body>
+  <!--  Navbar -->
+  <header class="navbar">
+    <div class="nav-container">
+      <div class="logo">MyPortfolio</div>
+      <nav>
+        <ul>
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="journey.html">Journey</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+<!-- 🦸 Hero Section -->
+<section id="hero" class="hero">
+  <div class="hero-content">
+    <img src="../img/GUY.jpg" alt="Profile Image" class="hero-image">
+    <h2>ยินดีต้อนรับสู่เว็ปไซต์ของ</h2>
+    <h1><span class="highlight">นาย นันทพัฒน์ สุกเเก้วณรงค์</span></h1>
+  </div>
+</section>
+
+<div class="section-divider"></div> <!--  Divider -->
+
+<!--  About Section -->
+<section id="about" class="section about">
+  <h2 class="section-title">About Me</h2>
+
+  <div class="about-card">
+    <div class="about-image">
+      <div class="about-frame">
+        <img src="../img/GUYREAL.jpg" alt="Profile Photo">
+      </div>
+    </div>
+
+    <div class="about-info">
+      <h3>ประวัติส่วนตัว</h3>
+      <p><strong>ชื่อ :</strong> นาย นันทพัฒน์ สุกแก้วณรงค์</p>
+      <p><strong>ชื่อเล่น :</strong> กาย</p>
+      <p><strong>วันเกิด :</strong> 5 ธันวาคม 2550</p>
+      <p><strong>อายุ :</strong> 18 ปี</p>
+      <p><strong>สัญชาติ :</strong> ไทย</p>
+      <p><strong>ศาสนา :</strong> พุทธ</p>
+      <p><strong>กำลังศึกษา :</strong> โรงเรียนเบญจมราชรังสฤษฎิ์</p>
+      <p><strong>แผนการเรียน :</strong> วิทยาศาสตร์–คณิตศาสตร์ (หุ่นยนต์)</p>
+      <p><strong>ความสนใจ :</strong> นวัตกรรม, เทคโนโลยี, วิศวกรรม, คอมพิวเตอร์</p>
+    </div>
+  </div>
+</section>
+
+
+<div class="section-divider"></div> <!--  Divider -->
+
+<!-- 💼 Portfolio Section -->
+<section id="portfolio" class="section portfolio ">
+  <div class="image-modal" id="imageModal">
+   <span class="close-modal">&times;</span>
+   <img class="modal-content" id="modalImage">
+  </div>
+  <!-- 🎓 Certificates -->
+  <h2 class="section-title">My Portfolio</h2>
+
+  <div class="portfolio-category certificates">
+    <h3 class="category-title">My Best Certificate</h3>
+    <div class="best-certificate">
+      <div class="certificate-item highlight">
+        <img src="../img/picture/115.jpg" alt="Best Certificate" class="certificate-image">
+        <h4 class="certificate-title"></h4>
+        <p class="certificate-desc">
+          การเเข่งขันศิลปหัตถกรรม เหรียญ ทองชนะเลิศ
+ในการเเข่งขันประเภทหุ่นยนต์ระดับกลาง ม.4-6
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="portfolio-category certificates">
+    <div class="certificate-grid level-2">
+      <div class="certificate-item">
+        <img src="../img/picture/122.jpg" alt="Certificate 2-1" class="certificate-image">
+        <h4 class="certificate-title">การเเข่งขัน TIC 2025 ประเภท Coding ประเภททีมรุ่น 16-18ปีที่คณะวิศวกรรมศาสตร์มหาวิทยาลัยเทคโนโลยีราชมงคลกรุงเทพ</h4>
+      </div>
+      <div class="certificate-item">
+        <img src="../img/picture/121.jpg" alt="Certificate 2-2" class="certificate-image">
+        <h4 class="certificate-title">การเเข่งขัน TIC 2025 ประเภท ROBOT ประเภททีมรุ่น 16-18ปีที่คณะวิศวกรรมศาสตร์มหาวิทยาลัยเทคโนโลยีราชมงคลกรุงเทพ</h4>
+      </div>
+    </div>
+  </div>
+
+  <div class="portfolio-category certificates">
+    <div class="certificate-grid level-3">
+      <div class="certificate-item">
+        <img src="../img/picture/5852_page-0001.jpg" alt="Certificate 3-1" class="certificate-image">
+        <h4 class="certificate-title">ค่ายคัดเลือกผู้เเทนประเทษไทย สู่ค่ายเยาวชนอาเซียน ปี68</h4>
+      </div>
+      <div class="certificate-item">
+        <img src="../img/W.jpg" alt="Certificate 3-2" class="certificate-image">
+        <h4 class="certificate-title">เข้าร่วมการเเข่งขัน ออกเเบบเเละทำเว็ป</h4>
+      </div>
+      <div class="certificate-item">
+        <img src="../img/picture/SI.png" alt="Certificate 3-3" class="certificate-image">
+        <h4 class="certificate-title">ทำนวตกรรมเว็ปไซต์เพื่อการศึกษาให้โรงเรียนเกี่ยวกับรด.ใส่ในเว็ปโรงเรียนเบญจมราชรังสฤษฎิ์</h4>
+      </div>
+    </div>
+  </div>
+
+    <div class="portfolio-category certificates">
+    <div class="certificate-grid level-4">
+      <div class="certificate-item">
+        <img src="../img/picture/120.jpg" alt="Certificate 3-1" class="certificate-image">
+        <h4 class="certificate-title"></h4>
+      </div>
+      <div class="certificate-item">
+        <img src="../img/picture/111.jpg" alt="Certificate 3-2" class="certificate-image">
+        <h4 class="certificate-title"></h4>
+      </div>
+      <div class="certificate-item">
+        <img src="../img/picture/108.jpg" alt="Certificate 3-3" class="certificate-image">
+        <h4 class="certificate-title"></h4>
+      </div>
+    </div>
+  </div>
+
+    <div class="portfolio-category certificates">
+    <div class="certificate-grid level-5">
+      <div class="certificate-item">
+        <img src="../img/picture/112.jpg" alt="Certificate 3-1" class="certificate-image">
+        <h4 class="certificate-title"></h4>
+      </div>
+      <div class="certificate-item">
+        <img src="../img/picture/104.jpg" alt="Certificate 3-2" class="certificate-image">
+        <h4 class="certificate-title"></h4>
+      </div>
+      <div class="certificate-item">
+        <img src="../img/picture/109.jpg" alt="Certificate 3-3" class="certificate-image">
+        <h4 class="certificate-title"></h4>
+      </div>
+    </div>
+  </div>
+
+<!-- 💻 Projects -->
+<div class="portfolio-category projects">
+  <h3 class="category-title">My Projects</h3>
+  <div class="portfolio-grid">
+
+    <div class="portfolio-item" data-project="1">
+      <img src="../img/project1-1.jpg" alt="Project 1" class="portfolio-image">
+      <h4 class="portfolio-title">เครื่องวัดคุณภาพน้ำ (NOT FINISH)</h4>
+      <p class="portfolio-desc">อุปกรณ์นี้ใช้วัดคุณภาพน้ำและต่อยอดโครงงาน IoT</p>
+    </div>
+
+    <div class="portfolio-item" data-project="2">
+      <img src="../img/unnamed.jpg" alt="Project 2" class="portfolio-image">
+      <h4 class="portfolio-title">AWAS - ระบบตรวจจับไฟ AI</h4>
+      <p class="portfolio-desc">AI ตรวจจับไฟและควันในภาพแบบเรียลไทม์</p>
+    </div>
+
+    <div class="portfolio-item" data-project="3">
+      <img src="../img/project3-1.jpg" alt="Project 3" class="portfolio-image">
+      <h4 class="portfolio-title">NVG DIY (NOT FINISH)</h4>
+      <p class="portfolio-desc">กล้อง DIY ที่สามารถจับความร้อนและภาพกลางคืน</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- 🖼️ Modal สำหรับ Project -->
+<div id="projectModal" class="project-modal">
+  <span class="close-btn">&times;</span>
+  <button class="arrow-btn prev-btn">&#10094;</button>
+  <img id="projectModalImg" src="" alt="Project Image" class="modal-content">
+  <button class="arrow-btn next-btn">&#10095;</button>
+</div>
+
+
+<div class="section-divider"></div> <!--  Divider -->
+
+<!--  Skills Section -->
+<section id="skills" class="section skills">
+  <h2 class="section-title">Skills</h2>
+  <ul class="skills-list">
+    <li>การเเก้ไขปัญหาเฉพาะหน้า</li>
+    <li>การเขียนโค้ดภาษา C python C++ </li>
+    <li>การทำ data analysis</li>
+    <li>การประยุกต์ใช้</li>
+    <li>การสังเกตุ</li>
+    <li>ทำอาหาร</li>
+  </ul>
+</section>
+
+<div class="section-divider"></div> <!--  Divider -->
+
+<!--  Contact Section -->
+<section id="contact" class="section">
+  <h1 class="section-title">Contact</h1>
+  <p class="section-desc">
+    Feel free to reach out or check out my profiles below.
+  </p>
+  <div class="contact-buttons">
+    <h3>Gmail - <span class="highlight">wey637wey@gmail.com</span> or <span class="highlight">51208@brr.ac.th</span></h3>
+    <a href="https://github.com/Guy-sioy" 
+       target="_blank" 
+       class="btn contact-btn">
+       GitHub
+     </a>
+    <a href="https://www.linkedin.com/in/nantapat-sukkaewnarong-3b161238b/" 
+       target="_blank" 
+       class="btn contact-btn">
+       LinkedIn
+     </a>
+  </div>
+</section>
+
+
+  <!--  Footer --https://github.com/Guy-sioy>
+  <footer class="footer">
+    <p>© 2025 Your Name. All rights reserved.</p>
+  </footer>
+</body>
+</html>
